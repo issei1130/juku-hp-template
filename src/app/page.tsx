@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 const PHONE_NUMBER = "090-2982-1902";
 const PHONE_HREF = "tel:09029821902";
@@ -10,7 +10,7 @@ const ADDRESS = "青森県青森市富田5丁目6-11";
 
 function StarRow({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex gap-0.5 text-brand ${className}`} aria-hidden>
+    <div className={`flex gap-0.5 text-badge-gold ${className}`} aria-hidden>
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
           <path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.2 1.3 6-5.4-3.1-5.4 3.1 1.3-6L1.3 7.7l6.1-.6L10 1.5z" />
@@ -20,72 +20,60 @@ function StarRow({ className = "" }: { className?: string }) {
   );
 }
 
-function IconBadge({ children }: { children: ReactNode }) {
+function SakuraPetal({ className = "" }: { className?: string }) {
   return (
-    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
-      {children}
-    </div>
+    <svg viewBox="0 0 32 32" className={className} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M16 2c2 3 2 6 0 8-2-2-2-5 0-8Zm0 28c-2-3-2-6 0-8 2 2 2 5 0 8ZM2 16c3-2 6-2 8 0-2 2-5 2-8 0Zm28 0c-3 2-6 2-8 0 2-2 5-2 8 0ZM6.3 6.3c3-.5 5.8.6 7 2.7-2.6.6-5.3-.5-7-2.7Zm19.4 19.4c-3 .5-5.8-.6-7-2.7 2.6-.6 5.3.5 7 2.7ZM6.3 25.7c1.7-2.2 4.4-3.3 7-2.7-1.2 2.1-4 3.2-7 2.7ZM25.7 6.3c1.2 2.1-.5 5-2.7 7-.6-2.6.5-5.3 2.7-7Z"
+      />
+    </svg>
   );
 }
 
-const icons = {
-  book: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-6 w-6">
-      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z" strokeLinejoin="round" />
-      <path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20" strokeLinejoin="round" />
-    </svg>
-  ),
-  pin: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-6 w-6">
-      <path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z" strokeLinejoin="round" />
-      <circle cx="12" cy="9" r="2.5" />
-    </svg>
-  ),
-  chat: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-6 w-6">
-      <path d="M4 5h16v10H9l-5 4V5Z" strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
-  ),
-  trophy: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-6 w-6">
-      <path d="M8 4h8v5a4 4 0 0 1-8 0V4Z" strokeLinejoin="round" />
-      <path d="M8 5H5a3 3 0 0 0 3 4M16 5h3a3 3 0 0 1-3 4M10 17h4M12 13v4M9 21h6" strokeLinecap="round" />
-    </svg>
-  ),
-};
+const reasons = [
+  {
+    number: 1,
+    color: "bg-badge-blue",
+    icon: "/illustrations/icon-experience.png",
+    title: "指導歴30年以上の経験と実績",
+    description: "プロ家庭教師として培ってきた指導ノウハウで、一人ひとりに最適な指導を行います。",
+  },
+  {
+    number: 2,
+    color: "bg-badge-red",
+    icon: "/illustrations/icon-success.png",
+    title: "高校受験で公立志望校合格を目指す指導",
+    description: "志望校合格を目標に、無理のない学習計画を一緒に立てて伴走します。",
+  },
+  {
+    number: 3,
+    color: "bg-badge-teal",
+    icon: "/illustrations/icon-personal.png",
+    title: "一人ひとりに合わせた個別指導",
+    description: "学年や目標、理解度に応じて指導内容を調整。生徒それぞれのペースを大切にします。",
+  },
+  {
+    number: 4,
+    color: "bg-badge-purple",
+    icon: "/illustrations/icon-local.png",
+    title: "富田地区に根ざした地域密着の指導",
+    description: "地域に根ざした塾だからこそ、学校や部活動の状況も踏まえた無理のない通塾ペースを一緒に考えます。",
+  },
+  {
+    number: 5,
+    color: "bg-badge-gold",
+    icon: null,
+    title: "通いやすい料金設定",
+    description: "月額8,000円〜18,000円。無理なく続けられる料金設定を心がけています。",
+  },
+];
 
 const stats = [
   { value: "30年以上", label: "塾長の指導実績" },
   { value: "5.0", label: "Googleクチコミ評価" },
   { value: "8,000円〜", label: "月謝" },
   { value: "小4〜高3", label: "対応学年" },
-];
-
-const features = [
-  {
-    icon: icons.book,
-    title: "30年以上の指導実績",
-    description:
-      "プロ家庭教師として培ってきた指導ノウハウを活かし、一人ひとりのつまずきの原因を的確に見つけて指導します。",
-  },
-  {
-    icon: icons.pin,
-    title: "富田地区に密着",
-    description:
-      "地域に根ざした塾だからこそ、学校や部活動の状況も踏まえた無理のない通塾ペースを一緒に考えます。",
-  },
-  {
-    icon: icons.chat,
-    title: "学年に合わせた個別指導",
-    description:
-      "小学生から高校生まで、学年や目標に応じて指導内容を調整。一人ひとりのペースを大切にします。",
-  },
-  {
-    icon: icons.trophy,
-    title: "県立志望校合格をサポート",
-    description:
-      "志望校合格を目標に、無理のない学習計画を一緒に立てて伴走します。",
-  },
 ];
 
 const steps = [
@@ -126,7 +114,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <span className="font-heading text-xl font-bold text-accent">飛翔塾</span>
           <nav className="hidden gap-8 text-sm font-medium text-foreground/80 md:flex">
-            <a href="#features" className="hover:text-brand">選ばれる理由</a>
+            <a href="#reasons" className="hover:text-brand">選ばれる理由</a>
             <a href="#voice" className="hover:text-brand">保護者・生徒の声</a>
             <a href="#pricing" className="hover:text-brand">月謝</a>
             <a href="#faq" className="hover:text-brand">よくある質問</a>
@@ -142,53 +130,72 @@ export default function Home() {
       </header>
 
       <main className="flex-1">
-        <section className="relative overflow-hidden border-b border-border-soft bg-gradient-to-b from-[#fff3e4] via-[#fff8f0] to-background">
-          <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand/10 blur-3xl" />
-          <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
-          <div className="relative mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 sm:py-28">
-            <span className="rounded-full bg-brand/10 px-4 py-1 text-sm font-bold text-brand">
-              青森市 富田地区の学習塾
-            </span>
-            <h1 className="font-heading text-4xl font-black leading-tight text-accent sm:text-5xl">
-              富田地区で30年以上。
-              <br />
-              一人ひとりと向き合う学習塾
-            </h1>
-            <p className="max-w-xl text-lg leading-8 text-foreground/80">
-              プロ家庭教師として30年以上の指導経験を持つ塾長が、小学生から高校生まで、
-              生徒一人ひとりのペースに合わせて指導します。
-            </p>
+        <section className="relative overflow-hidden border-b border-border-soft bg-gradient-to-b from-sakura-soft via-background to-background">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-brand/10 blur-3xl" />
+          <div className="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-sakura/20 blur-3xl" />
+          <SakuraPetal className="pointer-events-none absolute left-[8%] top-16 h-8 w-8 text-sakura/70" />
+          <SakuraPetal className="pointer-events-none absolute right-[15%] top-40 h-10 w-10 text-sakura/50" />
+          <SakuraPetal className="pointer-events-none absolute left-[40%] top-6 h-6 w-6 text-sakura/60" />
 
-            <a
-              href={GOOGLE_MAPS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-2xl border border-border-soft bg-surface px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
-            >
-              <span className="font-heading text-2xl font-black text-accent">5.0</span>
-              <div>
-                <StarRow />
-                <p className="mt-0.5 text-xs font-medium text-foreground/60">
-                  Googleクチコミより ・ 地域の保護者様からの評価
-                </p>
-              </div>
-            </a>
+          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 sm:py-24 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="flex flex-col items-start gap-6">
+              <span className="rounded-full bg-brand/10 px-4 py-1 text-sm font-bold text-brand">
+                青森市 富田地区の学習塾
+              </span>
+              <h1 className="font-heading text-4xl font-black leading-tight text-accent sm:text-5xl">
+                富田地区で30年以上。
+                <br />
+                一人ひとりと向き合う学習塾
+              </h1>
+              <p className="max-w-xl text-lg leading-8 text-foreground/80">
+                プロ家庭教師として30年以上の指導経験を持つ塾長が、小学生から高校生まで、
+                生徒一人ひとりのペースに合わせて指導します。
+              </p>
 
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Link
-                href={PHONE_HREF}
-                className="flex h-12 items-center justify-center rounded-full bg-brand px-8 text-base font-bold text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand-dark"
-              >
-                {PHONE_NUMBER} に電話する
-              </Link>
               <a
-                href={INSTAGRAM_URL}
+                href={GOOGLE_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 items-center justify-center rounded-full border border-accent px-8 text-base font-bold text-accent transition-colors hover:bg-accent hover:text-white"
+                className="flex items-center gap-3 rounded-2xl border border-border-soft bg-surface px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
               >
-                Instagramを見る
+                <span className="font-heading text-2xl font-black text-accent">5.0</span>
+                <div>
+                  <StarRow />
+                  <p className="mt-0.5 text-xs font-medium text-foreground/60">
+                    Googleクチコミより ・ 地域の保護者様からの評価
+                  </p>
+                </div>
               </a>
+
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href={PHONE_HREF}
+                  className="flex h-12 items-center justify-center rounded-full bg-brand px-8 text-base font-bold text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand-dark"
+                >
+                  {PHONE_NUMBER} に電話する
+                </Link>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-12 items-center justify-center rounded-full border border-accent px-8 text-base font-bold text-accent transition-colors hover:bg-accent hover:text-white"
+                >
+                  Instagramを見る
+                </a>
+              </div>
+            </div>
+
+            <div className="relative mx-auto w-full max-w-md">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-white/60 shadow-xl shadow-brand/10">
+                <Image
+                  src="/illustrations/hero-illustration.png"
+                  alt="飛翔塾の先生が生徒に寄り添って指導するイラスト"
+                  fill
+                  sizes="(min-width: 1024px) 420px, 90vw"
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -204,32 +211,53 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="features" className="mx-auto max-w-6xl px-6 py-20">
+        <section id="reasons" className="mx-auto max-w-6xl px-6 py-20">
           <div className="text-center">
-            <span className="text-sm font-bold text-brand">WHY HISHOJUKU</span>
+            <span className="text-sm font-bold text-brand">5 REASONS</span>
             <h2 className="mt-2 font-heading text-3xl font-bold text-accent">
-              飛翔塾が選ばれる理由
+              飛翔塾が選ばれる5つの理由
             </h2>
           </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature) => (
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {reasons.map((reason) => (
               <div
-                key={feature.title}
+                key={reason.number}
                 className="rounded-2xl border border-border-soft bg-surface p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <IconBadge>{feature.icon}</IconBadge>
-                <h3 className="mt-4 font-heading text-base font-bold text-accent">
-                  {feature.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-foreground/70">
-                  {feature.description}
-                </p>
+                {reason.icon ? (
+                  <div className="relative mx-auto mb-4 h-24 w-24">
+                    <Image
+                      src={reason.icon}
+                      alt=""
+                      fill
+                      sizes="96px"
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="mb-4 h-24" aria-hidden />
+                )}
+                <div className="flex gap-3">
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-heading text-sm font-black text-white ${reason.color}`}
+                  >
+                    {reason.number}
+                  </span>
+                  <div>
+                    <h3 className="font-heading text-base font-bold text-accent">
+                      {reason.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-7 text-foreground/70">
+                      {reason.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="voice" className="border-y border-border-soft bg-accent/5">
+        <section id="voice" className="border-y border-border-soft bg-sakura-soft/60">
           <div className="mx-auto max-w-4xl px-6 py-20">
             <div className="text-center">
               <span className="text-sm font-bold text-brand">VOICE</span>
@@ -278,7 +306,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pricing" className="border-t border-border-soft bg-accent/5 py-20">
+        <section id="pricing" className="border-t border-border-soft bg-sakura-soft/60 py-20">
           <div className="mx-auto max-w-4xl px-6">
             <div className="text-center">
               <span className="text-sm font-bold text-brand">PRICE</span>

@@ -1,13 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffaf3;
+  --background: #f5faff;
   --foreground: #1f2a37;
-  --brand: #b8541f;
-  --brand-dark: #8a3c14;
-  --accent: #1f3a5f;
+  --brand: #2f8fd6;
+  --brand-dark: #1f6fae;
+  --accent: #1a3a63;
+  --sakura: #f5a7c0;
+  --sakura-soft: #fdeef3;
   --surface: #ffffff;
-  --border-soft: #ece1d2;
+  --border-soft: #e2ecf5;
+  --badge-blue: #2f8fd6;
+  --badge-red: #e2566b;
+  --badge-teal: #1fa394;
+  --badge-purple: #8b6bc7;
+  --badge-gold: #d9a233;
 }
 
 @theme inline {
@@ -16,8 +23,15 @@
   --color-brand: var(--brand);
   --color-brand-dark: var(--brand-dark);
   --color-accent: var(--accent);
+  --color-sakura: var(--sakura);
+  --color-sakura-soft: var(--sakura-soft);
   --color-surface: var(--surface);
   --color-border-soft: var(--border-soft);
+  --color-badge-blue: var(--badge-blue);
+  --color-badge-red: var(--badge-red);
+  --color-badge-teal: var(--badge-teal);
+  --color-badge-purple: var(--badge-purple);
+  --color-badge-gold: var(--badge-gold);
   --font-sans: var(--font-geist-sans);
   --font-heading: var(--font-heading);
 }
