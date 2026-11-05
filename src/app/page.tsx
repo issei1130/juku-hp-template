@@ -1,5 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
+
+import {
+  CountUp,
+  FloatingPetal,
+  HoverLift,
+  Reveal,
+  StaggerGroup,
+  StaggerItem,
+} from "@/components/motion";
 
 const PHONE_NUMBER = "090-2982-1902";
 const PHONE_HREF = "tel:09029821902";
@@ -20,12 +28,17 @@ function StarRow({ className = "" }: { className?: string }) {
   );
 }
 
-function SakuraPetal({ className = "" }: { className?: string }) {
+function WaveDivider({ fill = "var(--accent)" }: { fill?: string }) {
   return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden>
+    <svg
+      viewBox="0 0 1440 90"
+      preserveAspectRatio="none"
+      className="relative block h-[60px] w-full sm:h-[90px]"
+      aria-hidden
+    >
       <path
-        fill="currentColor"
-        d="M16 2c2 3 2 6 0 8-2-2-2-5 0-8Zm0 28c-2-3-2-6 0-8 2 2 2 5 0 8ZM2 16c3-2 6-2 8 0-2 2-5 2-8 0Zm28 0c-3 2-6 2-8 0 2-2 5-2 8 0ZM6.3 6.3c3-.5 5.8.6 7 2.7-2.6.6-5.3-.5-7-2.7Zm19.4 19.4c-3 .5-5.8-.6-7-2.7 2.6-.6 5.3.5 7 2.7ZM6.3 25.7c1.7-2.2 4.4-3.3 7-2.7-1.2 2.1-4 3.2-7 2.7ZM25.7 6.3c1.2 2.1-.5 5-2.7 7-.6-2.6.5-5.3 2.7-7Z"
+        fill={fill}
+        d="M0 40 C 240 90 480 0 720 20 C 960 40 1200 85 1440 35 L1440 90 L0 90 Z"
       />
     </svg>
   );
@@ -69,13 +82,6 @@ const reasons = [
   },
 ];
 
-const stats = [
-  { value: "30年以上", label: "塾長の指導実績" },
-  { value: "5.0", label: "Googleクチコミ評価" },
-  { value: "8,000円〜", label: "月謝" },
-  { value: "小4〜高3", label: "対応学年" },
-];
-
 const steps = [
   {
     title: "お問い合わせ",
@@ -114,79 +120,103 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <span className="font-heading text-xl font-bold text-accent">飛翔塾</span>
           <nav className="hidden gap-8 text-sm font-medium text-foreground/80 md:flex">
-            <a href="#reasons" className="hover:text-brand">選ばれる理由</a>
-            <a href="#voice" className="hover:text-brand">保護者・生徒の声</a>
-            <a href="#pricing" className="hover:text-brand">月謝</a>
-            <a href="#faq" className="hover:text-brand">よくある質問</a>
-            <a href="#access" className="hover:text-brand">アクセス</a>
+            {[
+              ["#reasons", "選ばれる理由"],
+              ["#voice", "保護者・生徒の声"],
+              ["#pricing", "月謝"],
+              ["#faq", "よくある質問"],
+              ["#access", "アクセス"],
+            ].map(([href, label]) => (
+              <a
+                key={href}
+                href={href}
+                className="relative py-1 transition-colors hover:text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-brand after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {label}
+              </a>
+            ))}
           </nav>
-          <Link
+          <a
             href={PHONE_HREF}
-            className="rounded-full bg-brand px-5 py-2 text-sm font-bold text-white shadow-md shadow-brand/30 transition-colors hover:bg-brand-dark"
+            className="rounded-full bg-brand px-5 py-2 text-sm font-bold text-white shadow-md shadow-brand/30 transition-all hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/40"
           >
             電話で相談する
-          </Link>
+          </a>
         </div>
       </header>
 
       <main className="flex-1">
-        <section className="relative overflow-hidden border-b border-border-soft bg-gradient-to-b from-sakura-soft via-background to-background">
+        <section className="relative overflow-hidden bg-gradient-to-b from-sakura-soft via-background to-background">
           <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-brand/10 blur-3xl" />
           <div className="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-sakura/20 blur-3xl" />
-          <SakuraPetal className="pointer-events-none absolute left-[8%] top-16 h-8 w-8 text-sakura/70" />
-          <SakuraPetal className="pointer-events-none absolute right-[15%] top-40 h-10 w-10 text-sakura/50" />
-          <SakuraPetal className="pointer-events-none absolute left-[40%] top-6 h-6 w-6 text-sakura/60" />
+          <FloatingPetal className="pointer-events-none absolute left-[8%] top-16 h-8 w-8 text-sakura/70" duration={7} />
+          <FloatingPetal className="pointer-events-none absolute right-[15%] top-40 h-10 w-10 text-sakura/50" duration={9} delay={1.2} />
+          <FloatingPetal className="pointer-events-none absolute left-[40%] top-6 h-6 w-6 text-sakura/60" duration={5.5} delay={0.6} />
+          <FloatingPetal className="pointer-events-none absolute right-[38%] top-24 h-5 w-5 text-sakura/40" duration={8} delay={2} />
 
-          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 sm:py-24 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="flex flex-col items-start gap-6">
-              <span className="rounded-full bg-brand/10 px-4 py-1 text-sm font-bold text-brand">
-                青森市 富田地区の学習塾
-              </span>
-              <h1 className="font-heading text-4xl font-black leading-tight text-accent sm:text-5xl">
-                富田地区で30年以上。
-                <br />
-                一人ひとりと向き合う学習塾
-              </h1>
-              <p className="max-w-xl text-lg leading-8 text-foreground/80">
-                プロ家庭教師として30年以上の指導経験を持つ塾長が、小学生から高校生まで、
-                生徒一人ひとりのペースに合わせて指導します。
-              </p>
+          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 pb-16 pt-20 sm:pb-20 sm:pt-24 lg:grid-cols-[1.1fr_0.9fr]">
+            <StaggerGroup className="flex flex-col items-start gap-6" onMount>
+              <StaggerItem>
+                <span className="rounded-full bg-brand/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand">
+                  青森市 富田地区の学習塾
+                </span>
+              </StaggerItem>
+              <StaggerItem>
+                <h1 className="font-heading text-[clamp(2.5rem,4vw+1.2rem,4.25rem)] font-black leading-[1.08] tracking-tight text-accent">
+                  富田地区で30年以上。
+                  <br />
+                  一人ひとりと
+                  <br className="sm:hidden" />
+                  向き合う学習塾
+                </h1>
+              </StaggerItem>
+              <StaggerItem>
+                <p className="max-w-xl text-lg leading-8 text-foreground/80">
+                  プロ家庭教師として30年以上の指導経験を持つ塾長が、小学生から高校生まで、
+                  生徒一人ひとりのペースに合わせて指導します。
+                </p>
+              </StaggerItem>
 
-              <a
-                href={GOOGLE_MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-2xl border border-border-soft bg-surface px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <span className="font-heading text-2xl font-black text-accent">5.0</span>
-                <div>
-                  <StarRow />
-                  <p className="mt-0.5 text-xs font-medium text-foreground/60">
-                    Googleクチコミより ・ 地域の保護者様からの評価
-                  </p>
-                </div>
-              </a>
+              <StaggerItem>
+                <HoverLift>
+                  <a
+                    href={GOOGLE_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-2xl border border-border-soft bg-surface px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
+                  >
+                    <span className="font-heading text-2xl font-black text-accent">5.0</span>
+                    <div>
+                      <StarRow />
+                      <p className="mt-0.5 text-xs font-medium text-foreground/60">
+                        Googleクチコミより ・ 地域の保護者様からの評価
+                      </p>
+                    </div>
+                  </a>
+                </HoverLift>
+              </StaggerItem>
 
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Link
+              <StaggerItem className="flex flex-col gap-4 sm:flex-row">
+                <a
                   href={PHONE_HREF}
-                  className="flex h-12 items-center justify-center rounded-full bg-brand px-8 text-base font-bold text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand-dark"
+                  className="flex h-12 items-center justify-center rounded-full bg-brand px-8 text-base font-bold text-white shadow-lg shadow-brand/30 transition-all hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-xl hover:shadow-brand/40 active:translate-y-0"
                 >
                   {PHONE_NUMBER} に電話する
-                </Link>
+                </a>
                 <a
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 items-center justify-center rounded-full border border-accent px-8 text-base font-bold text-accent transition-colors hover:bg-accent hover:text-white"
+                  className="flex h-12 items-center justify-center rounded-full border border-accent px-8 text-base font-bold text-accent transition-all hover:-translate-y-0.5 hover:bg-accent hover:text-white"
                 >
                   Instagramを見る
                 </a>
-              </div>
-            </div>
+              </StaggerItem>
+            </StaggerGroup>
 
-            <div className="relative mx-auto w-full max-w-md">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-white/60 shadow-xl shadow-brand/10">
+            <Reveal delay={0.3} onMount className="relative mx-auto w-full max-w-md">
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-brand/15 to-sakura/25 blur-2xl" />
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image
                   src="/illustrations/hero-illustration.png"
                   alt="飛翔塾の先生が生徒に寄り添って指導するイラスト"
@@ -196,76 +226,91 @@ export default function Home() {
                   priority
                 />
               </div>
+            </Reveal>
+          </div>
+
+          <WaveDivider />
+        </section>
+
+        <section className="-mt-px bg-accent">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-6 pb-10 pt-4 sm:grid-cols-4 sm:pt-6">
+            <div className="text-center text-white">
+              <p className="font-heading text-2xl font-black sm:text-3xl">
+                <CountUp value={30} suffix="年以上" />
+              </p>
+              <p className="mt-1 text-xs text-white/70 sm:text-sm">塾長の指導実績</p>
+            </div>
+            <div className="text-center text-white">
+              <p className="font-heading text-2xl font-black sm:text-3xl">
+                <CountUp value={5} decimals={1} />
+              </p>
+              <p className="mt-1 text-xs text-white/70 sm:text-sm">Googleクチコミ評価</p>
+            </div>
+            <div className="text-center text-white">
+              <p className="font-heading text-2xl font-black sm:text-3xl">8,000円〜</p>
+              <p className="mt-1 text-xs text-white/70 sm:text-sm">月謝</p>
+            </div>
+            <div className="text-center text-white">
+              <p className="font-heading text-2xl font-black sm:text-3xl">小4〜高3</p>
+              <p className="mt-1 text-xs text-white/70 sm:text-sm">対応学年</p>
             </div>
           </div>
         </section>
 
-        <section className="border-b border-border-soft bg-accent">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center text-white">
-                <p className="font-heading text-2xl font-black sm:text-3xl">{stat.value}</p>
-                <p className="mt-1 text-xs text-white/70 sm:text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="reasons" className="mx-auto max-w-6xl px-6 py-20">
-          <div className="text-center">
-            <span className="text-sm font-bold text-brand">5 REASONS</span>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-accent">
+        <section id="reasons" className="mx-auto max-w-6xl px-6 py-24">
+          <Reveal className="text-center">
+            <span className="text-sm font-bold uppercase tracking-wider text-brand">5 Reasons</span>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-accent sm:text-4xl">
               飛翔塾が選ばれる5つの理由
             </h2>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          </Reveal>
+          <StaggerGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
             {reasons.map((reason) => (
-              <div
-                key={reason.number}
-                className="rounded-2xl border border-border-soft bg-surface p-6 shadow-sm transition-shadow hover:shadow-md"
-              >
-                {reason.icon ? (
-                  <div className="relative mx-auto mb-4 h-24 w-24">
-                    <Image
-                      src={reason.icon}
-                      alt=""
-                      fill
-                      sizes="96px"
-                      className="object-contain"
-                    />
+              <StaggerItem key={reason.number}>
+                <HoverLift className="h-full rounded-2xl border border-border-soft bg-surface p-6 shadow-sm transition-shadow hover:shadow-lg">
+                  {reason.icon ? (
+                    <div className="relative mx-auto mb-4 h-24 w-24 transition-transform duration-300 hover:scale-105">
+                      <Image
+                        src={reason.icon}
+                        alt=""
+                        fill
+                        sizes="96px"
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="mb-4 h-24" aria-hidden />
+                  )}
+                  <div className="flex gap-3">
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-heading text-sm font-black text-white ${reason.color}`}
+                    >
+                      {reason.number}
+                    </span>
+                    <div>
+                      <h3 className="font-heading text-base font-bold text-accent">
+                        {reason.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-7 text-foreground/70">
+                        {reason.description}
+                      </p>
+                    </div>
                   </div>
-                ) : (
-                  <div className="mb-4 h-24" aria-hidden />
-                )}
-                <div className="flex gap-3">
-                  <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-heading text-sm font-black text-white ${reason.color}`}
-                  >
-                    {reason.number}
-                  </span>
-                  <div>
-                    <h3 className="font-heading text-base font-bold text-accent">
-                      {reason.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-7 text-foreground/70">
-                      {reason.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+                </HoverLift>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </section>
 
         <section id="voice" className="border-y border-border-soft bg-sakura-soft/60">
-          <div className="mx-auto max-w-4xl px-6 py-20">
-            <div className="text-center">
-              <span className="text-sm font-bold text-brand">VOICE</span>
-              <h2 className="mt-2 font-heading text-3xl font-bold text-accent">
+          <div className="mx-auto max-w-4xl px-6 py-24">
+            <Reveal className="text-center">
+              <span className="text-sm font-bold uppercase tracking-wider text-brand">Voice</span>
+              <h2 className="mt-2 font-heading text-3xl font-bold text-accent sm:text-4xl">
                 保護者・生徒の声
               </h2>
-            </div>
-            <div className="mt-10 rounded-2xl border border-border-soft bg-surface p-8 shadow-sm sm:p-10">
+            </Reveal>
+            <Reveal delay={0.15} className="mt-10 rounded-2xl border border-border-soft bg-surface p-8 shadow-sm sm:p-10">
               <StarRow className="h-5 w-5" />
               <p className="mt-4 text-lg leading-8 text-foreground/80">
                 「元生徒でした。志望校に点数が足りなかったのですが、こちらの講師に教えてもらい、
@@ -282,37 +327,40 @@ export default function Home() {
                   Google口コミより見る →
                 </a>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-6 py-20">
-          <div className="text-center">
-            <span className="text-sm font-bold text-brand">FLOW</span>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-accent">
+        <section className="mx-auto max-w-6xl px-6 py-24">
+          <Reveal className="text-center">
+            <span className="text-sm font-bold uppercase tracking-wider text-brand">Flow</span>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-accent sm:text-4xl">
               ご入塾までの流れ
             </h2>
-          </div>
-          <div className="mt-12 grid gap-8 sm:grid-cols-3">
+          </Reveal>
+          <StaggerGroup className="relative mt-14 grid gap-8 sm:grid-cols-3" stagger={0.12}>
+            <div className="pointer-events-none absolute top-[2.25rem] left-0 right-0 hidden h-px bg-gradient-to-r from-transparent via-border-soft to-transparent sm:block" />
             {steps.map((step, i) => (
-              <div key={step.title} className="relative rounded-2xl border border-border-soft bg-surface p-6 shadow-sm">
-                <span className="font-heading text-4xl font-black text-brand/20">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-2 font-heading text-lg font-bold text-accent">{step.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-foreground/70">{step.description}</p>
-              </div>
+              <StaggerItem key={step.title}>
+                <div className="relative rounded-2xl border border-border-soft bg-surface p-6 shadow-sm">
+                  <span className="font-heading text-4xl font-black text-brand/20">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-2 font-heading text-lg font-bold text-accent">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-foreground/70">{step.description}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </section>
 
-        <section id="pricing" className="border-t border-border-soft bg-sakura-soft/60 py-20">
+        <section id="pricing" className="border-t border-border-soft bg-sakura-soft/60 py-24">
           <div className="mx-auto max-w-4xl px-6">
-            <div className="text-center">
-              <span className="text-sm font-bold text-brand">PRICE</span>
-              <h2 className="mt-2 font-heading text-3xl font-bold text-accent">月謝の目安</h2>
-            </div>
-            <div className="mt-10 rounded-2xl border border-border-soft bg-surface p-8 text-center shadow-sm sm:p-10">
+            <Reveal className="text-center">
+              <span className="text-sm font-bold uppercase tracking-wider text-brand">Price</span>
+              <h2 className="mt-2 font-heading text-3xl font-bold text-accent sm:text-4xl">月謝の目安</h2>
+            </Reveal>
+            <Reveal delay={0.15} className="mt-10 rounded-2xl border border-border-soft bg-surface p-8 text-center shadow-sm sm:p-10">
               <p className="font-heading text-4xl font-black text-brand sm:text-5xl">
                 月額 8,000円 〜 18,000円
               </p>
@@ -320,34 +368,33 @@ export default function Home() {
                 学年・指導内容により異なります。お子さまの学年や目標に合わせたプランをご提案しますので、
                 まずはお気軽にお問い合わせください。
               </p>
-            </div>
+            </Reveal>
           </div>
         </section>
 
-        <section id="faq" className="mx-auto max-w-4xl px-6 py-20">
-          <div className="text-center">
-            <span className="text-sm font-bold text-brand">FAQ</span>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-accent">よくある質問</h2>
-          </div>
-          <div className="mt-10 space-y-4">
+        <section id="faq" className="mx-auto max-w-4xl px-6 py-24">
+          <Reveal className="text-center">
+            <span className="text-sm font-bold uppercase tracking-wider text-brand">FAQ</span>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-accent sm:text-4xl">よくある質問</h2>
+          </Reveal>
+          <StaggerGroup className="mt-10 space-y-4" stagger={0.08}>
             {faqs.map((faq) => (
-              <details
-                key={faq.question}
-                className="group rounded-2xl border border-border-soft bg-surface p-6 shadow-sm"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-accent">
-                  {faq.question}
-                  <span className="ml-4 text-brand transition-transform group-open:rotate-45">＋</span>
-                </summary>
-                <p className="mt-4 text-sm leading-7 text-foreground/70">{faq.answer}</p>
-              </details>
+              <StaggerItem key={faq.question}>
+                <details className="group rounded-2xl border border-border-soft bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+                  <summary className="flex cursor-pointer list-none items-center justify-between font-bold text-accent">
+                    {faq.question}
+                    <span className="ml-4 text-brand transition-transform duration-300 group-open:rotate-45">＋</span>
+                  </summary>
+                  <p className="mt-4 text-sm leading-7 text-foreground/70">{faq.answer}</p>
+                </details>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </section>
 
         <section id="access" className="border-t border-border-soft bg-surface">
-          <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 sm:grid-cols-2">
-            <div>
+          <div className="mx-auto grid max-w-6xl gap-10 px-6 py-24 sm:grid-cols-2">
+            <Reveal>
               <h2 className="font-heading text-3xl font-bold text-accent">アクセス</h2>
               <dl className="mt-6 space-y-4 text-sm leading-7 text-foreground/80">
                 <div>
@@ -363,29 +410,29 @@ export default function Home() {
                   <dd>小学生・中学生・高校生</dd>
                 </div>
               </dl>
-            </div>
-            <div className="flex flex-col justify-center rounded-2xl bg-accent px-8 py-10 text-white shadow-xl shadow-accent/20">
+            </Reveal>
+            <Reveal delay={0.15} className="flex flex-col justify-center rounded-2xl bg-accent px-8 py-10 text-white shadow-xl shadow-accent/20">
               <h3 className="font-heading text-xl font-bold">まずはお気軽にご相談ください</h3>
               <p className="mt-3 text-sm leading-7 text-white/80">
                 お電話またはInstagramのDMで、学習のお悩みをお聞かせください。
               </p>
               <div className="mt-6 flex flex-col gap-3">
-                <Link
+                <a
                   href={PHONE_HREF}
-                  className="flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-bold text-accent transition-colors hover:bg-white/90"
+                  className="flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-bold text-accent transition-all hover:-translate-y-0.5 hover:bg-white/90"
                 >
                   {PHONE_NUMBER} に電話する
-                </Link>
+                </a>
                 <a
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 items-center justify-center rounded-full border border-white px-6 text-sm font-bold text-white transition-colors hover:bg-white/10"
+                  className="flex h-12 items-center justify-center rounded-full border border-white px-6 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
                 >
                   InstagramでDMする
                 </a>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
       </main>
@@ -407,12 +454,12 @@ export default function Home() {
       </footer>
 
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-border-soft bg-surface/95 p-3 shadow-[0_-4px_12px_rgba(0,0,0,0.06)] backdrop-blur md:hidden">
-        <Link
+        <a
           href={PHONE_HREF}
           className="flex h-12 w-full items-center justify-center rounded-full bg-brand text-base font-bold text-white shadow-md"
         >
           {PHONE_NUMBER} に電話で相談する
-        </Link>
+        </a>
       </div>
     </div>
   );

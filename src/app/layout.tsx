@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Zen_Maru_Gothic } from "next/font/google";
+import { AppMotionConfig } from "@/components/motion-config";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -26,7 +27,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ja"
       className={`${notoSansJP.variable} ${zenMaruGothic.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <svg className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.025] mix-blend-overlay" aria-hidden>
+          <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)" />
+        </svg>
+        <AppMotionConfig>{children}</AppMotionConfig>
+      </body>
     </html>
   );
 }
