@@ -97,6 +97,27 @@ const steps = [
   },
 ];
 
+const newsItems = [
+  {
+    date: "2026.11.01",
+    tag: "お知らせ",
+    tagColor: "bg-badge-blue",
+    title: "冬期講習(12月〜1月)の受付を開始しました。学年・目標に合わせた集中プランをご用意しています。",
+  },
+  {
+    date: "2026.10.15",
+    tag: "イベント",
+    tagColor: "bg-badge-red",
+    title: "無料の学習相談会を実施中です。お電話またはInstagramのDMからお気軽にお問い合わせください。",
+  },
+  {
+    date: "2026.09.01",
+    tag: "お知らせ",
+    tagColor: "bg-badge-teal",
+    title: "2学期の時間割を更新しました。詳しくは面談時にご案内しています。",
+  },
+];
+
 const faqs = [
   {
     question: "体験授業や無料相談はありますか?",
@@ -122,6 +143,7 @@ export default function Home() {
           <nav className="hidden gap-8 text-sm font-medium text-foreground/80 md:flex">
             {[
               ["#reasons", "選ばれる理由"],
+              ["#news", "お知らせ"],
               ["#voice", "保護者・生徒の声"],
               ["#pricing", "月謝"],
               ["#faq", "よくある質問"],
@@ -300,6 +322,36 @@ export default function Home() {
               </StaggerItem>
             ))}
           </StaggerGroup>
+        </section>
+
+        <section id="news" className="border-t border-border-soft bg-surface py-24">
+          <div className="mx-auto max-w-4xl px-6">
+            <Reveal className="text-center">
+              <span className="text-sm font-bold uppercase tracking-wider text-brand">News</span>
+              <h2 className="mt-2 font-heading text-3xl font-bold text-accent sm:text-4xl">
+                塾からのお知らせ
+              </h2>
+            </Reveal>
+            <StaggerGroup className="mt-14 space-y-4" stagger={0.08}>
+              {newsItems.map((item) => (
+                <StaggerItem key={item.title}>
+                  <HoverLift className="flex flex-col gap-3 rounded-2xl border border-border-soft bg-background p-6 shadow-sm transition-shadow hover:shadow-md sm:flex-row sm:items-center sm:gap-6">
+                    <div className="flex shrink-0 items-center gap-3 sm:w-44">
+                      <time className="text-sm font-bold text-foreground/50">{item.date}</time>
+                      <span
+                        className={`rounded-full px-3 py-1 text-xs font-bold text-white ${item.tagColor}`}
+                      >
+                        {item.tag}
+                      </span>
+                    </div>
+                    <p className="text-sm font-medium leading-7 text-foreground/80">
+                      {item.title}
+                    </p>
+                  </HoverLift>
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
+          </div>
         </section>
 
         <section id="voice" className="border-y border-border-soft bg-sakura-soft/60">
